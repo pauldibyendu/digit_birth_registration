@@ -41,10 +41,6 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    const Text(
-                      'User Details',
-                      style: TextStyle(fontSize: 32, fontWeight: FontWeight.w700),
-                    ),
                     DigitTextFormField(
                       label: 'Baby First Name',
                       formControlName: babyFirstNameKey,
@@ -180,13 +176,12 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
   }
 
   FormGroup buildForm() => fb.group(<String, Object>{
-
+    babyLastNameKey : FormControl<String>(value: '', validators: [
+      Validators.maxLength(128)
+    ]),
     babyFirstNameKey : FormControl<String>(value: '', validators: [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(128)
-    ]),
-    babyLastNameKey : FormControl<String>(value: '', validators: [
       Validators.maxLength(128)
     ]),
     doctorNameKey: FormControl<String>(value: '', validators: [
