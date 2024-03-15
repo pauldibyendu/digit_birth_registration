@@ -12,33 +12,55 @@ import '../models/birth_registration_application.dart';
 
 class BirthRegistrationRepositoryImpl implements BirthRegistrationRepository {
 
-  // final ApiService _apiService;
+  final ApiService _apiService;
 
-  // BirthRegistrationRepositoryImpl(this._apiService);
+  BirthRegistrationRepositoryImpl(this._apiService);
 
   @override
   Future<DataState<List<BirthRegistrationApplicationModel>>> getBirthRegistrations() async {
 
     return DataSuccess(birthList);
-    // try {
-    //
-    //   // final httpResponse = await _apiService.getBirthRegistrationList();
-    //   //
-    //   // if (httpResponse.statusCode == HttpStatus.ok) {
-    //   //   return DataSuccess(httpResponse);
-    //   // } else {
-    //   //   // return DataFailed(
-    //   //   //     DioError(
-    //   //   //         error: httpResponse.response.statusMessage,
-    //   //   //         response: httpResponse.response,
-    //   //   //         type: DioErrorType.response,
-    //   //   //         requestOptions: httpResponse.response.requestOptions
-    //   //   //     )
-    //   //   // );
-    //   // }
-    // } on DioError catch(e){
-    //   return DataFailed(e);
-    // }
+
+    try {
+      final httpResponse = await _apiService.getBirthRegistrationList();
+
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(httpResponse.data);
+      } else {
+        return DataFailed(
+            DioError(
+                error: httpResponse.response.statusMessage,
+                response: httpResponse.response,
+                type: DioErrorType.response,
+                requestOptions: httpResponse.response.requestOptions
+            )
+        );
+      }
+    } on DioError catch(e){
+      return DataFailed(e);
+    }
+
+  }
+
+  @override
+  Future<DataState<String>> saveBirthData(BirthRegistrationApplicationModel birthData) async {
+
+    birthData.id = (birthList.length + 1).toString();
+    birthData.applicationNumber = "APP00${birthData.id!}";
+    birthList.add(birthData);
+
+    return const DataSuccess("Data saved successfully");
+
+  }
+
+  @override
+  Future<DataState<String>> updateBirthData(BirthRegistrationApplicationModel birthData) async {
+
+    BirthRegistrationApplicationModel updateObject = birthList.firstWhere((obj) => obj.id == birthData.id);
+    updateObject.copyFrom(birthData);
+
+    return const DataSuccess("Data updated successfully");
+
   }
 
   // @override

@@ -6,4 +6,8 @@ abstract class BirthRegistrationRepository {
 
   Future<DataState<List<BirthRegistrationApplicationModel>>> getBirthRegistrations();
 
+  Future<DataState<String>> updateBirthData(BirthRegistrationApplicationModel birthData);
+
+  Future<DataState<String>> saveBirthData(BirthRegistrationApplicationModel birthData);
+
 }

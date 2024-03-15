@@ -1,3 +1,6 @@
+import 'package:digit_birth_certification/app/presentation/features/birth_list/bloc/birth_list_bloc.dart';
+import 'package:digit_birth_certification/app/presentation/features/birth_list/bloc/birth_list_event.dart';
+import 'package:digit_birth_certification/app/presentation/features/birth_list/bloc/birth_list_state.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,12 +8,11 @@ import 'package:digit_components/digit_components.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../config/app_mixin.dart';
-import '../../data/models/birth_registration_application.dart';
-import '../bloc/birth_registration_bloc.dart';
-import '../bloc/birth_registration_event.dart';
-import '../bloc/birth_registration_state.dart';
-import '../widgets/birth_card.dart';
+import '../../../../../config/app_mixin.dart';
+import '../../../../data/models/birth_registration_application.dart';
+import '../../birth_registration/bloc/birth_registration_bloc.dart';
+import '../../birth_registration/bloc/birth_registration_state.dart';
+import '../../../widgets/birth_card.dart';
 
 class BirthRegistrationList extends StatefulWidget with AppMixin{
 
@@ -25,7 +27,7 @@ class BirthRegistrationListState extends State<BirthRegistrationList> {
 
   @override
   void initState() {
-    widget.birthRegistrationBloc.add(BirthDataInitialEvent());
+    widget.birthListBloc.add(BirthListInitialEvent());
     super.initState();
   }
 
@@ -35,26 +37,18 @@ class BirthRegistrationListState extends State<BirthRegistrationList> {
         appBar: AppBar(
           title: const Text("Birth registration list"),
         ),
-        body: BlocConsumer<BirthRegistrationBloc, BirthDataState>(
-          bloc: Get.find<BirthRegistrationBloc>(),
-          listenWhen: (previous, current) => current is BirthDataActionState,
-          buildWhen: (previous, current) => current is! BirthDataActionState,
-          listener: (context, state) {
-            switch (state.runtimeType) {
-              case NavigateToRegistrationActionState:
-                Navigator.pushNamed(context, '/BirthRegistration');
-                break;
-              default:
-                break;
-            }
-          },
+        body: BlocConsumer<BirthListBloc, BirthListState>(
+          bloc: widget.birthListBloc,
+          listenWhen: (previous, current) => current is BirthListActionState,
+          buildWhen: (previous, current) => current is! BirthListActionState,
+          listener: (context, state) { },
           builder: (context, state) {
             switch (state.runtimeType) {
-              case BirthDataLoadingState:
+              case BirthListLoadingState:
                 return const Center(child: CircularProgressIndicator());
-              case BirthDataLoadedSuccessState:
-                return HomeScreen(birthDataList: (state as BirthDataLoadedSuccessState).birthData);
-              case BirthDataErrorState:
+              case BirthListLoadedSuccessState:
+                return HomeScreen(birthDataList: (state as BirthListLoadedSuccessState).birthData);
+              case BirthListErrorState:
                 return const Center(child: Text("Something went wrong"));
               default:
                 return const SizedBox();
@@ -93,7 +87,7 @@ class HomeScreen extends StatelessWidget with AppMixin{
           ),
           DigitElevatedButton(
               onPressed: () {
-                birthRegistrationBloc.add(BirthRegistrationNavigateEvent());
+                Navigator.pushNamed(context, '/BirthRegistration');
               },
               child: const Text('Birth Registration')
           ),

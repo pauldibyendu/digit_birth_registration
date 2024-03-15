@@ -1,3 +1,4 @@
+import 'package:digit_birth_certification/app/presentation/features/birth_registration/bloc/birth_registration_event.dart';
 import 'package:digit_birth_certification/config/app_mixin.dart';
 import 'package:digit_components/widgets/atoms/digit_checkbox.dart';
 import 'package:digit_components/widgets/atoms/digit_toaster.dart';
@@ -6,10 +7,9 @@ import 'package:digit_components/digit_components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../config/theme/app_themes.dart';
-import '../../data/models/birth_registration_application.dart';
+import '../../../../../config/theme/app_themes.dart';
+import '../../../../data/models/birth_registration_application.dart';
 import '../bloc/birth_registration_bloc.dart';
-import '../bloc/birth_registration_event.dart';
 import '../bloc/birth_registration_state.dart';
 
 class BirthRegistrationForm extends StatefulWidget with AppMixin {
@@ -56,13 +56,13 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
               action: (BuildContext context) {
                 if (form.valid) {
                   if(widget.birthData == null){
-                      widget.birthRegistrationBloc.add(BirthDataSaveEvent(birthData: birthData));
+                      widget.birthRegistrationBloc.add(BirthRegistrationSaveEvent(birthData: birthData));
                   }
                   else{
-                      widget.birthRegistrationBloc.add(BirthDataUpdateEvent(birthData: birthData));
+                      widget.birthRegistrationBloc.add(BirthRegistrationUpdateEvent(birthData: birthData));
                   }
                 } else {
-                  widget.birthRegistrationBloc.add(BirthDataInvalidInputEvent());
+                  widget.birthRegistrationBloc.add(BirthRegistrationInvalidInputEvent());
                 }
                 Navigator.of(context,
                     rootNavigator: true)
@@ -80,29 +80,29 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<BirthRegistrationBloc, BirthDataState>(
+    return BlocListener<BirthRegistrationBloc, BirthRegistrationState>(
       bloc: widget.birthRegistrationBloc,
       listener: (context, state) {
         switch (state.runtimeType) {
-          case SaveDataActionState:
+          case SuccessActionState:
             buildForm().reset();
-            Navigator.pushNamed(context, '/');
             DigitToast.show(context,
                 options: DigitToastOptions(
-                  "Data saved successfully",
+                  (state as SuccessActionState).successMsg,
                   false,
                   theme(),
                 ),
             );
+            Navigator.pushNamed(context, '/');
             break;
-          case UpdateDataActionState:
+          case FailedActionState:
             buildForm().reset();
             DigitToast.show(context,
-              options: DigitToastOptions(
-                "Data updated successfully",
-                false,
-                theme(),
-              ),
+                options: DigitToastOptions(
+                  (state as FailedActionState).failedMsg,
+                  false,
+                  theme(),
+                ),
             );
             Navigator.pushNamed(context, '/');
             break;

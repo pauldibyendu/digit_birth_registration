@@ -1,13 +1,35 @@
-import 'package:get/get.dart';
+import 'package:digit_birth_certification/app/data/repository/birth_registration_repository_impl.dart';
+import 'package:digit_birth_certification/app/domain/usecase/birth_registration_use_case.dart';
+import 'package:get_it/get_it.dart';
 
+import 'app/data/data_sources/api_service.dart';
+import 'app/domain/repository/birth_registration_repository.dart';
+import 'app/presentation/features/birth_list/bloc/birth_list_bloc.dart';
+import 'app/presentation/features/birth_registration/bloc/birth_registration_bloc.dart';
+import 'package:dio/dio.dart';
 
-import 'app/presentation/bloc/birth_registration_bloc.dart';
-
+final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
 
-  Get.put(BirthRegistrationBloc());
+  sl.registerSingleton<Dio>(Dio());
 
-  Get.find<BirthRegistrationBloc>();
+  sl.registerSingleton<ApiService>(ApiService(sl()));
+
+  sl.registerSingleton<BirthRegistrationRepository>(
+      BirthRegistrationRepositoryImpl(sl())
+  );
+
+  sl.registerSingleton<BirthRegistrationUseCase>(
+      BirthRegistrationUseCase(sl())
+  );
+
+  sl.registerFactory<BirthRegistrationBloc>(()=>
+      BirthRegistrationBloc(sl())
+  );
+
+  sl.registerFactory<BirthListBloc>(()=>
+      BirthListBloc(sl())
+  );
 
 }

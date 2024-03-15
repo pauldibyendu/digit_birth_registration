@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../app/data/models/birth_registration_application.dart';
-import '../../app/presentation/pages/birth_registration_form.dart';
-import '../../app/presentation/pages/birth_registration_list.dart';
+import '../../app/presentation/features/birth_registration/pages/birth_registration_form.dart';
+import '../../app/presentation/features/birth_list/pages/birth_registration_list.dart';
 
 
 class AppRoutes {
