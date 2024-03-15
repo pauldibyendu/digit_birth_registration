@@ -2,7 +2,6 @@ import 'package:digit_components/digit_components.dart';
 import 'package:digit_components/widgets/digit_outline_button.dart';
 import 'package:flutter/material.dart';
 
-import '../../../config/theme/app_themes.dart';
 import '../../data/models/birth_registration_application.dart';
 import 'card_text.dart';
 
@@ -39,7 +38,9 @@ class BirthCard extends StatelessWidget{
                       width: 150,
                       child: DigitOutLineButton(
                         label: 'EDIT',
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.pushNamed(context, '/UpdateBirthData', arguments: birthApplication);
+                        },
                       ),
                     ),
                   ],

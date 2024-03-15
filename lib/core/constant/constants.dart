@@ -2,7 +2,7 @@ import '../../app/data/models/birth_registration_application.dart';
 
 const String apiBaseURL = "https://www.egov.in";
 
-const BirthRegistrationApplicationModel model1 = BirthRegistrationApplicationModel(
+BirthRegistrationApplicationModel model1 = BirthRegistrationApplicationModel(
   id: '1',
   tenantId: 'tenant1',
   applicationNumber: 'APP001',
@@ -16,7 +16,7 @@ const BirthRegistrationApplicationModel model1 = BirthRegistrationApplicationMod
   timeOfBirth: 1630831200, // Example UNIX timestamp for 2022-09-05 12:00:00
 );
 
-const BirthRegistrationApplicationModel model2 = BirthRegistrationApplicationModel(
+BirthRegistrationApplicationModel model2 = BirthRegistrationApplicationModel(
   id: '2',
   tenantId: 'tenant2',
   applicationNumber: 'APP002',
@@ -30,7 +30,7 @@ const BirthRegistrationApplicationModel model2 = BirthRegistrationApplicationMod
   timeOfBirth: 1643678400, // Example UNIX timestamp for 2022-12-31 12:00:00
 );
 
-const BirthRegistrationApplicationModel model3 = BirthRegistrationApplicationModel(
+BirthRegistrationApplicationModel model3 = BirthRegistrationApplicationModel(
   id: '3',
   tenantId: 'tenant3',
   applicationNumber: 'APP003',
@@ -44,7 +44,7 @@ const BirthRegistrationApplicationModel model3 = BirthRegistrationApplicationMod
   timeOfBirth: 1635729600, // Example UNIX timestamp for 2022-11-01 12:00:00
 );
 
-const BirthRegistrationApplicationModel model4 = BirthRegistrationApplicationModel(
+BirthRegistrationApplicationModel model4 = BirthRegistrationApplicationModel(
   id: '4',
   tenantId: 'tenant4',
   applicationNumber: 'APP004',
@@ -58,7 +58,7 @@ const BirthRegistrationApplicationModel model4 = BirthRegistrationApplicationMod
   timeOfBirth: 1642536000, // Example UNIX timestamp for 2022-12-19 12:00:00
 );
 
-const BirthRegistrationApplicationModel model5 = BirthRegistrationApplicationModel(
+BirthRegistrationApplicationModel model5 = BirthRegistrationApplicationModel(
   id: '5',
   tenantId: 'tenant5',
   applicationNumber: 'APP005',

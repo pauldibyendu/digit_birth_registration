@@ -6,8 +6,4 @@ abstract class BirthRegistrationRepository {
 
   Future<DataState<List<BirthRegistrationApplicationModel>>> getBirthRegistrations();
 
-  // Future < void > saveBirthRegistrations(BirthRegistrationApplicationEntity entity);
-  //
-  // Future < void > updateBirthRegistrations(BirthRegistrationApplicationEntity entity);
-
 }

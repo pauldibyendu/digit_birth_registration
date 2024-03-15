@@ -14,3 +14,12 @@ class BirthDataSaveEvent extends BirthDataEvent {
   });
 }
 
+class BirthDataUpdateEvent extends BirthDataEvent {
+  final BirthRegistrationApplicationModel birthData;
+  BirthDataUpdateEvent({
+    required this.birthData,
+  });
+}
+
+class BirthDataInvalidInputEvent extends BirthDataEvent {}
+

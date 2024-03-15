@@ -3,19 +3,19 @@ import '../../domain/entities/birth_registration_application.dart';
 
 class BirthRegistrationApplicationModel extends BirthRegistrationApplicationEntity{
 
-  final String ? id;
-  final String ? tenantId;
-  final String ? applicationNumber;
-  final String ? babyFirstName;
-  final String ? babyLastName;
-  final String ? father;
-  final String ? mother;
-  final String ? doctorName;
-  final String ? hospitalName;
-  final String ? placeOfBirth;
-  final int ? timeOfBirth;
+  String ? id;
+  String ? tenantId;
+  String ? applicationNumber;
+  String ? babyFirstName;
+  String ? babyLastName;
+  String ? father;
+  String ? mother;
+  String ? doctorName;
+  String ? hospitalName;
+  String ? placeOfBirth;
+  int ? timeOfBirth;
 
-  const BirthRegistrationApplicationModel({
+  BirthRegistrationApplicationModel({
     this.id,
     this.tenantId,
     this.applicationNumber,
@@ -60,6 +60,21 @@ class BirthRegistrationApplicationModel extends BirthRegistrationApplicationEnti
       timeOfBirth: entity.timeOfBirth,
     );
   }
+
+  copyFrom(BirthRegistrationApplicationModel entity){
+    id = entity.id;
+    tenantId = entity.tenantId;
+    applicationNumber = entity.applicationNumber;
+    babyFirstName = entity.babyFirstName;
+    babyLastName = entity.babyLastName;
+    father = entity.father;
+    mother = entity.mother;
+    doctorName = entity.doctorName;
+    hospitalName = entity.hospitalName;
+    placeOfBirth = entity.placeOfBirth;
+    timeOfBirth = entity.timeOfBirth;
+  }
+
 }
 
 // id:

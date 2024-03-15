@@ -18,8 +18,16 @@ class BirthDataErrorState extends BirthDataState {}
 
 abstract class BirthDataActionState extends BirthDataState {}
 
+
+
 class NavigateToRegistrationActionState extends BirthDataActionState {}
 
 class SaveDataActionState extends BirthDataActionState {}
+
+class UpdateDataActionState extends BirthDataActionState {}
+
+class InvalidDataActionState extends BirthDataActionState {}
+
+
 
 class ViewDataState extends BirthDataActionState {}
