@@ -136,7 +136,6 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Baby First Name',
                         formControlName: babyFirstNameKey,
                         isRequired: true,
-                        prefixText: birthData.babyFirstName,
                         onChanged: (val) { birthData.babyFirstName = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Baby First Name is required',
@@ -150,7 +149,6 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Baby Last Name',
                         formControlName: babyLastNameKey,
                         isRequired: true,
-                        prefixText: birthData.babyLastName,
                         onChanged: (val) { birthData.babyLastName = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Baby Last Name is required',
@@ -164,7 +162,6 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Doctor Name',
                         formControlName: doctorNameKey,
                         isRequired: true,
-                        prefixText: birthData.doctorName,
                         onChanged: (val) { birthData.doctorName = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Doctor Name is required',
@@ -178,7 +175,6 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Father Name',
                         formControlName: fatherNameKey,
                         isRequired: true,
-                        prefixText: birthData.father,
                         onChanged: (val) { birthData.father = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Father Name is required',
@@ -192,7 +188,6 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Hospital Name',
                         formControlName: hospitalNameKey,
                         isRequired: true,
-                        prefixText: birthData.hospitalName,
                         onChanged: (val) { birthData.hospitalName = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Hospital Name is required',
@@ -206,7 +201,6 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Mother Name',
                         formControlName: motherNameKey,
                         isRequired: true,
-                        prefixText: birthData.mother,
                         onChanged: (val) { birthData.mother = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Mother Name is required',
@@ -220,7 +214,6 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Place Of Birth',
                         formControlName: placeOfBirthKey,
                         isRequired: true,
-                        prefixText: birthData.placeOfBirth,
                         onChanged: (val) { birthData.placeOfBirth = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Place Of Birth is required',
@@ -250,42 +243,62 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
   }
 
   FormGroup buildForm() => fb.group(<String, Object>{
-    babyFirstNameKey : FormControl<String>(value: '', validators: [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(128)
-    ]),
-    babyLastNameKey : FormControl<String>(value: '', validators: [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(128)
-    ]),
-    doctorNameKey: FormControl<String>(value: '', validators: [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(128)
-    ]),
-    fatherNameKey: FormControl<String>(value: '', validators: [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(128)
-    ]),
-    hospitalNameKey: FormControl<String>(value: '', validators: [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(128)
-    ]),
-    motherNameKey: FormControl<String>(value: '', validators: [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(128)
-    ]),
-    placeOfBirthKey: FormControl<String>(value: '', validators: [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.maxLength(128)
-    ]),
-
+    babyFirstNameKey : FormControl<String>(
+      value: birthData.babyFirstName ?? '',
+      validators: [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(128)
+      ]
+    ),
+    babyLastNameKey : FormControl<String>(
+      value: birthData.babyLastName ?? '',
+      validators: [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(128)
+      ]
+    ),
+    doctorNameKey: FormControl<String>(
+      value: birthData.doctorName ?? '',
+      validators: [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(128)
+      ]
+    ),
+    fatherNameKey: FormControl<String>(
+      value: birthData.father ?? '',
+      validators: [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(128)
+      ]
+    ),
+    hospitalNameKey: FormControl<String>(
+      value: birthData.hospitalName ?? '',
+      validators: [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(128)
+      ]
+    ),
+    motherNameKey: FormControl<String>(
+      value: birthData.mother ?? '',
+      validators: [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(128)
+      ]
+    ),
+    placeOfBirthKey: FormControl<String>(
+      value: birthData.placeOfBirth ?? '',
+      validators: [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(128)
+      ]
+    ),
   });
 
 }
