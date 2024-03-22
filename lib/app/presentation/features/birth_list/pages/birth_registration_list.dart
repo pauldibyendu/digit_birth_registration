@@ -25,6 +25,8 @@ class BirthRegistrationList extends StatefulWidget with AppMixin{
 
 class BirthRegistrationListState extends State<BirthRegistrationList> {
 
+  TextEditingController searchController = TextEditingController();
+
   @override
   void initState() {
     widget.birthListBloc.add(BirthListInitialEvent());
@@ -37,23 +39,39 @@ class BirthRegistrationListState extends State<BirthRegistrationList> {
         appBar: AppBar(
           title: const Text("Birth registration list"),
         ),
-        body: BlocConsumer<BirthListBloc, BirthListState>(
-          bloc: widget.birthListBloc,
-          listenWhen: (previous, current) => current is BirthListActionState,
-          buildWhen: (previous, current) => current is! BirthListActionState,
-          listener: (context, state) { },
-          builder: (context, state) {
-            switch (state.runtimeType) {
-              case BirthListLoadingState:
-                return const Center(child: CircularProgressIndicator());
-              case BirthListLoadedSuccessState:
-                return HomeScreen(birthDataList: (state as BirthListLoadedSuccessState).birthData);
-              case BirthListErrorState:
-                return const Center(child: Text("Something went wrong"));
-              default:
-                return const SizedBox();
-            }
-          },
+        body: Column(
+          children: [
+            DigitSearchBar(
+                controller: searchController,
+                hintText: "Tenant ID",
+                textCapitalization: TextCapitalization.words,
+                onChanged: (value) => { widget.birthListBloc.add(BirthListSearchEvent(searchString: value)) }
+            ),
+            BlocConsumer<BirthListBloc, BirthListState>(
+              bloc: widget.birthListBloc,
+              listenWhen: (previous, current) => current is BirthListActionState,
+              buildWhen: (previous, current) => current is! BirthListActionState,
+              listener: (context, state) { },
+              builder: (context, state) {
+                switch (state.runtimeType) {
+                  case BirthListLoadingState:
+                    return const Center(child: CircularProgressIndicator());
+                  case BirthListLoadedSuccessState:
+                    return HomeScreen(birthDataList: (state as BirthListLoadedSuccessState).birthData);
+                  case BirthListErrorState:
+                    return const Center(child: Text("Something went wrong"));
+                  default:
+                    return const SizedBox();
+                }
+              },
+            ),
+            DigitElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/BirthRegistration');
+                },
+                child: const Text('Birth Registration')
+            ),
+          ],
         )
     );
 
@@ -72,26 +90,16 @@ class HomeScreen extends StatelessWidget with AppMixin{
     // TODO: implement build
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-              primary: false,
-              itemCount: birthDataList.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return BirthCard(birthApplication: birthDataList[index]);
-              },
-            ),
-          ),
-          DigitElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/BirthRegistration');
-              },
-              child: const Text('Birth Registration')
-          ),
-        ],
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height - 230,
+        child: ListView.builder(
+          primary: false,
+          itemCount: birthDataList.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return BirthCard(birthApplication: birthDataList[index]);
+          },
+        ),
       ),
     );
   }

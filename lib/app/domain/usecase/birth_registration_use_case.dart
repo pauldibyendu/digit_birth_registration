@@ -12,6 +12,10 @@ class BirthRegistrationUseCase {
     return _birthRegistrationRepository.getBirthRegistrations();
   }
 
+  Future<DataState<List<BirthRegistrationApplicationModel>>> getFilteredBirthData(String search) {
+    return _birthRegistrationRepository.getBirthRegistrationsSearches(search);
+  }
+
   Future<DataState<String>> updateBirthData(BirthRegistrationApplicationModel birthData) {
     return _birthRegistrationRepository.updateBirthData(birthData);
   }

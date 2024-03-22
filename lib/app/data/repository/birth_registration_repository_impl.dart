@@ -21,24 +21,33 @@ class BirthRegistrationRepositoryImpl implements BirthRegistrationRepository {
 
     return DataSuccess(birthList);
 
-    try {
-      final httpResponse = await _apiService.getBirthRegistrationList();
+    // try {
+    //   final httpResponse = await _apiService.getBirthRegistrationList();
+    //
+    //   if (httpResponse.response.statusCode == HttpStatus.ok) {
+    //     return DataSuccess(httpResponse.data);
+    //   } else {
+    //     return DataFailed(
+    //         DioError(
+    //             error: httpResponse.response.statusMessage,
+    //             response: httpResponse.response,
+    //             type: DioErrorType.response,
+    //             requestOptions: httpResponse.response.requestOptions
+    //         )
+    //     );
+    //   }
+    // } on DioError catch(e){
+    //   return DataFailed(e);
+    // }
 
-      if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data);
-      } else {
-        return DataFailed(
-            DioError(
-                error: httpResponse.response.statusMessage,
-                response: httpResponse.response,
-                type: DioErrorType.response,
-                requestOptions: httpResponse.response.requestOptions
-            )
-        );
-      }
-    } on DioError catch(e){
-      return DataFailed(e);
-    }
+  }
+
+  @override
+  Future<DataState<List<BirthRegistrationApplicationModel>>> getBirthRegistrationsSearches(String search) async {
+
+    List<BirthRegistrationApplicationModel> filteredList = birthList.where((person) => search.isEmpty ? true : person.tenantId?.contains(search) ?? false).toList();
+
+    return DataSuccess(filteredList);
 
   }
 

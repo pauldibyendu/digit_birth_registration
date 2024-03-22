@@ -14,6 +14,7 @@ class BirthListBloc extends Bloc<BirthListEvent, BirthListState> {
 
   BirthListBloc(this._birthRegistrationUseCase) : super(BirthListInitialState()) {
     on<BirthListInitialEvent>(birthDataInitialEvent);
+    on<BirthListSearchEvent>(birthDataSearchEvent);
   }
 
   FutureOr<void> birthDataInitialEvent(BirthListInitialEvent event,
@@ -22,6 +23,22 @@ class BirthListBloc extends Bloc<BirthListEvent, BirthListState> {
     emit(BirthListLoadingState());
 
     final dataState = await _birthRegistrationUseCase.getBirthData();
+
+    if(dataState is DataSuccess){
+      emit(BirthListLoadedSuccessState(birthData: dataState.data ?? []));
+    }
+    if(dataState is DataFailed){
+      emit(BirthListErrorState(errorMsg: dataState.error?.message ?? ""));
+    }
+
+  }
+
+  FutureOr<void> birthDataSearchEvent(BirthListSearchEvent event,
+      Emitter<BirthListState> emit) async {
+
+    emit(BirthListLoadingState());
+
+    final dataState = await _birthRegistrationUseCase.getFilteredBirthData(event.searchString);
 
     if(dataState is DataSuccess){
       emit(BirthListLoadedSuccessState(birthData: dataState.data ?? []));

@@ -24,11 +24,11 @@ Future<void> initializeDependencies() async {
       BirthRegistrationUseCase(sl())
   );
 
-  sl.registerFactory<BirthRegistrationBloc>(()=>
+  sl.registerSingleton<BirthRegistrationBloc>(
       BirthRegistrationBloc(sl())
   );
 
-  sl.registerFactory<BirthListBloc>(()=>
+  sl.registerSingleton<BirthListBloc>(
       BirthListBloc(sl())
   );
 

@@ -24,6 +24,7 @@ class BirthCard extends StatelessWidget{
                 CardText(formName: "Mother name", value: "${birthApplication.mother}",),
                 CardText(formName: "Hospital name", value: "${birthApplication.hospitalName}",),
                 CardText(formName: "Place of birth", value: "${birthApplication.placeOfBirth}",),
+                CardText(formName: "Tenant ID", value: "${birthApplication.tenantId}",),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
