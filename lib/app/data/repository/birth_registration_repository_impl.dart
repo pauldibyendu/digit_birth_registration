@@ -72,19 +72,4 @@ class BirthRegistrationRepositoryImpl implements BirthRegistrationRepository {
 
   }
 
-  // @override
-  // Future<List<ArticleModel>> getSavedArticles() async {
-  //   return _appDatabase.articleDAO.getArticles();
-  // }
-  //
-  // @override
-  // Future<void> removeArticle(ArticleEntity article) {
-  //   return _appDatabase.articleDAO.deleteArticle(ArticleModel.fromEntity(article));
-  // }
-  //
-  // @override
-  // Future<void> saveArticle(ArticleEntity article) {
-  //   return _appDatabase.articleDAO.insertArticle(ArticleModel.fromEntity(article));
-  // }
-
 }
