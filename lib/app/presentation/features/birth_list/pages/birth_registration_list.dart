@@ -55,13 +55,13 @@ class BirthRegistrationListState extends State<BirthRegistrationList> {
               builder: (context, state) {
                 switch (state.runtimeType) {
                   case BirthListLoadingState:
-                    return const Center(child: CircularProgressIndicator());
+                    return const Expanded(child: Center(child: CircularProgressIndicator()));
                   case BirthListLoadedSuccessState:
                     return HomeScreen(birthDataList: (state as BirthListLoadedSuccessState).birthData);
                   case BirthListErrorState:
-                    return const Center(child: Text("Something went wrong"));
+                    return const Expanded(child: Center(child: Text("Something went wrong")));
                   default:
-                    return const SizedBox();
+                    return const Expanded(child: SizedBox());
                 }
               },
             ),
@@ -88,10 +88,9 @@ class HomeScreen extends StatelessWidget with AppMixin{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height - 230,
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
         child: ListView.builder(
           primary: false,
           itemCount: birthDataList.length,
