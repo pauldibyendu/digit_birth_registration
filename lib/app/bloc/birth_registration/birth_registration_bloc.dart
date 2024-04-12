@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:digit_birth_certification/core/resources/data_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../domain/usecase/birth_registration_use_case.dart';
+import '../../domain/usecase/birth_registration_use_case.dart';
 import 'birth_registration_event.dart';
 import 'birth_registration_state.dart';
 

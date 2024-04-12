@@ -5,7 +5,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import 'app/presentation/features/birth_list/pages/birth_registration_list.dart';
-import 'config/bindings.dart';
+import 'config/bindings/bindings.dart';
 import 'config/routes/routes.dart';
 import 'injection_container.dart';
 

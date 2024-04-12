@@ -1,6 +1,6 @@
-import 'package:digit_birth_certification/app/presentation/features/birth_list/bloc/birth_list_bloc.dart';
-import 'package:digit_birth_certification/app/presentation/features/birth_list/bloc/birth_list_event.dart';
-import 'package:digit_birth_certification/app/presentation/features/birth_list/bloc/birth_list_state.dart';
+import 'package:digit_birth_certification/app/bloc/birth_list/birth_list_bloc.dart';
+import 'package:digit_birth_certification/app/bloc/birth_list/birth_list_event.dart';
+import 'package:digit_birth_certification/app/bloc/birth_list/birth_list_state.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +8,9 @@ import 'package:digit_components/digit_components.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../config/app_mixin.dart';
+import '../../../../../config/mixin/app_mixin.dart';
 import '../../../../data/models/birth_registration_application.dart';
-import '../../birth_registration/bloc/birth_registration_bloc.dart';
-import '../../birth_registration/bloc/birth_registration_state.dart';
+import '../../../../bloc/birth_registration/birth_registration_bloc.dart';
 import '../../../widgets/birth_card.dart';
 
 class BirthRegistrationList extends StatefulWidget with AppMixin{

@@ -54,8 +54,10 @@ class BirthRegistrationRepositoryImpl implements BirthRegistrationRepository {
   @override
   Future<DataState<String>> saveBirthData(BirthRegistrationApplicationModel birthData) async {
 
-    birthData.id = (birthList.length + 1).toString();
-    birthData.applicationNumber = "APP00${birthData.id!}";
+    String id = (birthList.length + 1).toString();
+    String applicationNumber = "APP00$id";
+    String tennantId = "tenant$id";
+    birthData = birthData.copyWith(id: id, applicationNumber: applicationNumber, tenantId: tennantId);
     birthList.add(birthData);
 
     return const DataSuccess("Data saved successfully");
@@ -66,7 +68,7 @@ class BirthRegistrationRepositoryImpl implements BirthRegistrationRepository {
   Future<DataState<String>> updateBirthData(BirthRegistrationApplicationModel birthData) async {
 
     BirthRegistrationApplicationModel updateObject = birthList.firstWhere((obj) => obj.id == birthData.id);
-    updateObject.copyFrom(birthData);
+    updateObject = BirthRegistrationApplicationModel.fromJson(birthData.toJson());
 
     return const DataSuccess("Data updated successfully");
 

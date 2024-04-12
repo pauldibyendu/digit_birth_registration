@@ -1,5 +1,6 @@
-import 'package:digit_birth_certification/app/presentation/features/birth_registration/bloc/birth_registration_event.dart';
-import 'package:digit_birth_certification/config/app_mixin.dart';
+import 'package:digit_birth_certification/app/bloc/birth_registration/birth_registration_event.dart';
+import 'package:digit_birth_certification/app/bloc/birth_registration/birth_registration_state.dart';
+import 'package:digit_birth_certification/config/mixin/app_mixin.dart';
 import 'package:digit_components/widgets/atoms/digit_checkbox.dart';
 import 'package:digit_components/widgets/atoms/digit_toaster.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../../config/theme/app_themes.dart';
 import '../../../../data/models/birth_registration_application.dart';
-import '../bloc/birth_registration_bloc.dart';
-import '../bloc/birth_registration_state.dart';
+import '../../../../bloc/birth_registration/birth_registration_bloc.dart';
 
 class BirthRegistrationForm extends StatefulWidget with AppMixin {
   final String title;
@@ -33,10 +33,18 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
   String motherNameKey = 'motherName';
   String placeOfBirthKey = 'placeOfBirth';
 
+  String? babyFirstName;
+  String? babyLastName;
+  String? doctorName;
+  String? father;
+  String? hospitalName;
+  String? mother;
+  String? placeOfBirth;
+
   @override
   void initState() {
     if(widget.birthData != null){
-      birthData.copyFrom(widget.birthData!);
+      birthData = BirthRegistrationApplicationModel.fromJson(widget.birthData!.toJson());
     }
     super.initState();
   }
@@ -55,6 +63,18 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
               label: 'Confirm',
               action: (BuildContext context) {
                 if (form.valid) {
+                  birthData = BirthRegistrationApplicationModel(
+                      id: widget.birthData?.id,
+                      tenantId: widget.birthData?.tenantId,
+                      applicationNumber: widget.birthData?.applicationNumber,
+                      babyFirstName: babyFirstName,
+                      babyLastName: babyLastName,
+                      doctorName: doctorName,
+                      father: father,
+                      hospitalName: hospitalName,
+                      mother: mother,
+                      placeOfBirth: placeOfBirth
+                  );
                   if(widget.birthData == null){
                       widget.birthRegistrationBloc.add(BirthRegistrationSaveEvent(birthData: birthData));
                   }
@@ -136,7 +156,7 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Baby First Name',
                         formControlName: babyFirstNameKey,
                         isRequired: true,
-                        onChanged: (val) { birthData.babyFirstName = val.value.toString(); },
+                        onChanged: (val) { babyFirstName = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Baby First Name is required',
                           'minLength': (_) =>
@@ -149,7 +169,7 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Baby Last Name',
                         formControlName: babyLastNameKey,
                         isRequired: true,
-                        onChanged: (val) { birthData.babyLastName = val.value.toString(); },
+                        onChanged: (val) { babyLastName = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Baby Last Name is required',
                           'minLength': (_) =>
@@ -162,7 +182,7 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Doctor Name',
                         formControlName: doctorNameKey,
                         isRequired: true,
-                        onChanged: (val) { birthData.doctorName = val.value.toString(); },
+                        onChanged: (val) { doctorName = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Doctor Name is required',
                           'minLength': (_) =>
@@ -175,7 +195,7 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Father Name',
                         formControlName: fatherNameKey,
                         isRequired: true,
-                        onChanged: (val) { birthData.father = val.value.toString(); },
+                        onChanged: (val) { father = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Father Name is required',
                           'minLength': (_) =>
@@ -188,7 +208,7 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Hospital Name',
                         formControlName: hospitalNameKey,
                         isRequired: true,
-                        onChanged: (val) { birthData.hospitalName = val.value.toString(); },
+                        onChanged: (val) { hospitalName = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Hospital Name is required',
                           'minLength': (_) =>
@@ -201,7 +221,7 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Mother Name',
                         formControlName: motherNameKey,
                         isRequired: true,
-                        onChanged: (val) { birthData.mother = val.value.toString(); },
+                        onChanged: (val) { mother = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Mother Name is required',
                           'minLength': (_) =>
@@ -214,7 +234,7 @@ class BirthRegistrationFormState extends State<BirthRegistrationForm> {
                         label: 'Place Of Birth',
                         formControlName: placeOfBirthKey,
                         isRequired: true,
-                        onChanged: (val) { birthData.placeOfBirth = val.value.toString(); },
+                        onChanged: (val) { placeOfBirth = val.value.toString(); },
                         validationMessages: {
                           'required': (_) => 'Place Of Birth is required',
                           'minLength': (_) =>

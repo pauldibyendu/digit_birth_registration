@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'birth_list_event.dart';
 import 'birth_list_state.dart';
 
+
 class BirthListBloc extends Bloc<BirthListEvent, BirthListState> {
 
   final BirthRegistrationUseCase _birthRegistrationUseCase;

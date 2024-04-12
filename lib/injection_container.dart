@@ -4,8 +4,8 @@ import 'package:get_it/get_it.dart';
 
 import 'app/data/data_sources/api_service.dart';
 import 'app/domain/repository/birth_registration_repository.dart';
-import 'app/presentation/features/birth_list/bloc/birth_list_bloc.dart';
-import 'app/presentation/features/birth_registration/bloc/birth_registration_bloc.dart';
+import 'app/bloc/birth_list/birth_list_bloc.dart';
+import 'app/bloc/birth_registration/birth_registration_bloc.dart';
 import 'package:dio/dio.dart';
 
 final sl = GetIt.instance;
