@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=2.19.6 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -53,19 +53,28 @@ dependencies:
   intl: ^0.18.1
 
   #Database
-  floor: any
+#  floor: any
 
   #make request to api
   retrofit: ^3.0.1
 
   #Hooks
-  flutter_hooks: ^0.18.3
+#  flutter_hooks: ^0.18.3
 
   #chached image
   cached_network_image: ^3.2.0
 
   #digit components
+
   digit_components: ^0.0.2+1
+  reactive_forms: ^14.1.0
+  flutter_lints: ^2.0.0
+  freezed: ^2.4.3
+  build_runner: ^2.4.6
+  json_annotation: ^4.8.1
+  freezed_annotation: ^2.4.1
+  json_serializable: ^6.3.1
+  watcher: ^1.1.0
 
 
 dev_dependencies:
@@ -73,7 +82,10 @@ dev_dependencies:
     sdk: flutter
   retrofit_generator: any
   floor_generator: any
-  build_runner: any
+#  build_runner: any
+#  freezed: ^2.4.7
+#  json_serializable: any
+#  watcher: any
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
